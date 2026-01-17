@@ -1,0 +1,22 @@
+[
+   {
+      "directory" : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug",
+      "command"   : "clang++ -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/source\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos/posix\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/lib/clang/18/include\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug/syscfg\" -DDeviceFamily_CC13X2 -xc",
+      "file"      : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug/syscfg/ti_devices_config.c"
+   },
+   {
+      "directory" : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug",
+      "command"   : "clang++ -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/source\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos/posix\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/lib/clang/18/include\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug/syscfg\" -DDeviceFamily_CC13X2 -xc",
+      "file"      : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug/syscfg/ti_drivers_config.c"
+   },
+   {
+      "directory" : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug",
+      "command"   : "clang++ -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/source\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos/posix\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/lib/clang/18/include\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug/syscfg\" -DDeviceFamily_CC13X2 -xc",
+      "file"      : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/empty.c"
+   },
+   {
+      "directory" : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug",
+      "command"   : "clang++ -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/source\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos\" -I\"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos/posix\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/armv7em-ti-none-eabihf/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c++/v1\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/lib/clang/18/include\" -isystem\"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c\" -I\"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug/syscfg\" -DDeviceFamily_CC13X2 -xc",
+      "file"      : "C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/main_nortos.c"
+   }
+]
