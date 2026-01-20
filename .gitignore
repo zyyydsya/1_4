@@ -1,9 +1,8 @@
 # ===== CCS / Build output =====
-CPU_occupancy_rate/Debug/
+CPU_occupancy_rate_Hardware/Debug/
+CPU_occupancy_rate_Software/Debug/
 DAC_sin_wave/Debug/
 PWM_Hardware/Debug/
 PWM_Software/Debug/
 shutdown_test/Debug/
 sleep_test/Debug/
-
-.theia/
