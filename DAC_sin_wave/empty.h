@@ -20,7 +20,7 @@
  *	Change History :
  *  <Date>      <Version>  <Author>      | <Description>          *
  *------------------------------------------------------------------*
- *  2026/1/14   | 0.0.1   | zhangye      | Create file            *
+ *  2026/1/14   | 0.0.1   | 张也         | Create file            *
  */
 
 #ifndef __EMPTY_H__

@@ -1,12 +1,34 @@
-/*********************************************************************
-* Copyright (c)  Hehe,Ltd. All rights reserved.
-* Description:测试软件延时的CPU功耗
-*
-* History:修改历史记录列表，包括修改日期、修改者及修改内容简述
-* Date               Author                Modification:
-* 2026-1-20          张也                   create v1.0
-*********************************************************************/
-
+/*
+ * Copyright (c) 2015-2019, Texas Instruments Incorporated
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * *  Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * *  Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *
+ * *  Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 /*
  *  ======== empty.c ========
  */
@@ -20,17 +42,17 @@
 /* Driver Header files */
 #include <ti/drivers/GPIO.h>
 #include <ti/drivers/apps/LED.h>
-/* 引入正确的Power驱动头文件（SDK 8.x版本） */
+/* Power驱动头文件 */
 #include <ti/drivers/power/PowerCC26XX.h>
 
 /* Driver configuration */
 #include "ti_drivers_config.h"
 
+#define SYSCLK_FREQ_MHZ 48 /* 系统时钟频率为48MHz */
+
 static uint32_t timer_period = 1000; /* 模拟定时器触发周期us，与硬件版本一致 */
 LED_Handle led0Handle = NULL;
 LED_Handle led1Handle = NULL;
-/* 直接定义CC13xx/CC26xx默认主频（48MHz），避免Power接口兼容问题 */
-#define SYSCLK_FREQ_MHZ 48
 
 /**
  * @brief       软件微秒级延时函数
