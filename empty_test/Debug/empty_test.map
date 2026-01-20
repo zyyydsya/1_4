@@ -1,7 +1,7 @@
 ******************************************************************************
             TI ARM Clang Linker PC v4.0.4                      
 ******************************************************************************
->> Linked Sat Jan 17 15:26:18 2026
+>> Linked Tue Jan 20 15:25:05 2026
 
 OUTPUT FILE NAME:   <empty_test.out>
 ENTRY POINT SYMBOL: "resetISR"  address: 00001ef5

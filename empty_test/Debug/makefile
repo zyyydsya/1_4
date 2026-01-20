@@ -132,7 +132,7 @@ all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 empty_test.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: Arm Linker'
-	"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mlittle-endian -mthumb -Oz -gdwarf-3 -march=armv7e-m -Wl,-m"empty_test.map" -Wl,-i"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/source" -Wl,-i"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos" -Wl,-i"C:/ruanjian/ti/ccs2040/ccs_setup_20.4.0.00013.lnk/empty_test/Debug/syscfg" -Wl,-i"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/lib" -Wl,--diag_wrap=off -Wl,--display_error_number -Wl,--warn_sections -Wl,--xml_link_info="empty_test_linkInfo.xml" -Wl,--rom_model -o "empty_test.out" $(ORDERED_OBJS)
+	"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mlittle-endian -mthumb -Oz -gdwarf-3 -march=armv7e-m -Wl,-m"empty_test.map" -Wl,-i"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/source" -Wl,-i"C:/ruanjian/ti/ccs2040/simplelink_cc13xx_cc26xx_sdk_8_32_00_07/kernel/nortos" -Wl,-i"C:/Djia/gitroom/training/1_4/empty_test/Debug/syscfg" -Wl,-i"C:/ruanjian/ti/ccs2040/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/lib" -Wl,--diag_wrap=off -Wl,--display_error_number -Wl,--warn_sections -Wl,--xml_link_info="empty_test_linkInfo.xml" -Wl,--rom_model -o "empty_test.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 

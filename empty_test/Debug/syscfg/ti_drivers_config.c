@@ -10,7 +10,7 @@
 #include <stdint.h>
 
 #ifndef DeviceFamily_CC13X2
-    #define DeviceFamily_CC13X2
+#define DeviceFamily_CC13X2
 #endif
 
 #include <ti/devices/DeviceFamily.h>
@@ -32,8 +32,7 @@ const uint_least8_t GPIO_pinUpperBound = 30;
  *  ======== gpioPinConfigs ========
  *  Array of Pin configurations
  */
-GPIO_PinConfig gpioPinConfigs[31] =
-{
+GPIO_PinConfig gpioPinConfigs[31] = {
     0, /* Pin is not available on this device */
     0, /* Pin is not available on this device */
     0, /* Pin is not available on this device */
@@ -88,12 +87,11 @@ const uint_least8_t CONFIG_GPIO_BUTTON_0_INPUT_CONST = CONFIG_GPIO_BUTTON_0_INPU
 /*
  *  ======== GPIO_config ========
  */
-const GPIO_Config GPIO_config =
-{
-    .configs = ( GPIO_PinConfig * ) gpioPinConfigs,
-    .callbacks = ( GPIO_CallbackFxn * ) gpioCallbackFunctions,
+const GPIO_Config GPIO_config = {
+    .configs = (GPIO_PinConfig *)gpioPinConfigs,
+    .callbacks = (GPIO_CallbackFxn *)gpioCallbackFunctions,
     .userArgs = gpioUserArgs,
-    .intPriority = ( ~0 )
+    .intPriority = (~0)
 };
 
 /*
@@ -103,11 +101,10 @@ const GPIO_Config GPIO_config =
 #include <ti/drivers/power/PowerCC26X2.h>
 #include "ti_drivers_config.h"
 
-extern void PowerCC26XX_standbyPolicy ( void );
-extern bool PowerCC26XX_calibrate ( unsigned int );
+extern void PowerCC26XX_standbyPolicy(void);
+extern bool PowerCC26XX_calibrate(unsigned int);
 
-const PowerCC26X2_Config PowerCC26X2_config =
-{
+const PowerCC26X2_Config PowerCC26X2_config = {
     .enablePolicy             = true,
     .policyInitFxn            = NULL,
     .policyFxn                = PowerCC26XX_standbyPolicy,
@@ -126,8 +123,7 @@ const PowerCC26X2_Config PowerCC26X2_config =
 #define CONFIG_BUTTON_COUNT 1
 Button_Object ButtonObjects[CONFIG_BUTTON_COUNT];
 
-static const Button_HWAttrs ButtonHWAttrs[CONFIG_BUTTON_COUNT] =
-{
+static const Button_HWAttrs ButtonHWAttrs[CONFIG_BUTTON_COUNT] = {
     /* CONFIG_BUTTON_0 */
     /* LaunchPad Button BTN-1 (Left) */
     {
@@ -137,8 +133,7 @@ static const Button_HWAttrs ButtonHWAttrs[CONFIG_BUTTON_COUNT] =
     },
 };
 
-const Button_Config Button_config[CONFIG_BUTTON_COUNT] =
-{
+const Button_Config Button_config[CONFIG_BUTTON_COUNT] = {
     /* CONFIG_BUTTON_0 */
     /* LaunchPad Button BTN-1 (Left) */
     {
@@ -167,46 +162,45 @@ const uint_least8_t Button_count = CONFIG_BUTTON_COUNT;
 /*
  *  ======== Board_sendExtFlashByte ========
  */
-void Board_sendExtFlashByte ( uint8_t byte )
+void Board_sendExtFlashByte(uint8_t byte)
 {
     uint8_t i;
 
     /* SPI Flash CS */
-    GPIO_write ( BOARD_EXT_FLASH_SPI_CS, 0 );
+    GPIO_write(BOARD_EXT_FLASH_SPI_CS, 0);
 
-    for ( i = 0; i < 8; i++ )
-    {
-        GPIO_write ( BOARD_EXT_FLASH_SPI_CLK, 0 ); /* SPI Flash CLK */
+    for (i = 0; i < 8; i++) {
+        GPIO_write(BOARD_EXT_FLASH_SPI_CLK, 0); /* SPI Flash CLK */
 
         /* SPI Flash PICO */
-        GPIO_write ( BOARD_EXT_FLASH_SPI_PICO, ( byte >> ( 7 - i ) ) & 0x01 );
-        GPIO_write ( BOARD_EXT_FLASH_SPI_CLK, 1 ); /* SPI Flash CLK */
+        GPIO_write(BOARD_EXT_FLASH_SPI_PICO, (byte >> (7 - i)) & 0x01);
+        GPIO_write(BOARD_EXT_FLASH_SPI_CLK, 1);  /* SPI Flash CLK */
 
         /*
          * Waste a few cycles to keep the CLK high for at
          * least 45% of the period.
          * 3 cycles per loop: 8 loops @ 48 Mhz = 0.5 us.
          */
-        CPUdelay ( 8 );
+        CPUdelay(8);
     }
 
-    GPIO_write ( BOARD_EXT_FLASH_SPI_CLK, 0 ); /* CLK */
-    GPIO_write ( BOARD_EXT_FLASH_SPI_CS, 1 ); /* CS */
+    GPIO_write(BOARD_EXT_FLASH_SPI_CLK, 0);  /* CLK */
+    GPIO_write(BOARD_EXT_FLASH_SPI_CS, 1);  /* CS */
 
     /*
      * Keep CS high at least 40 us
      * 3 cycles per loop: 700 loops @ 48 Mhz ~= 44 us
      */
-    CPUdelay ( 700 );
+    CPUdelay(700);
 }
 
 /*
  *  ======== Board_wakeUpExtFlash ========
  */
-void Board_wakeUpExtFlash ( void )
+void Board_wakeUpExtFlash(void)
 {
     /* SPI Flash CS*/
-    GPIO_setConfig ( BOARD_EXT_FLASH_SPI_CS, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_HIGH | GPIO_CFG_OUT_STR_MED );
+    GPIO_setConfig(BOARD_EXT_FLASH_SPI_CS, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_HIGH | GPIO_CFG_OUT_STR_MED);
 
     /*
      *  To wake up we need to toggle the chip select at
@@ -214,18 +208,18 @@ void Board_wakeUpExtFlash ( void )
      */
 
     /* Toggle chip select for ~20ns to wake ext. flash */
-    GPIO_write ( BOARD_EXT_FLASH_SPI_CS, 0 );
+    GPIO_write(BOARD_EXT_FLASH_SPI_CS, 0);
     /* 3 cycles per loop: 1 loop @ 48 Mhz ~= 62 ns */
-    CPUdelay ( 1 );
-    GPIO_write ( BOARD_EXT_FLASH_SPI_CS, 1 );
+    CPUdelay(1);
+    GPIO_write(BOARD_EXT_FLASH_SPI_CS, 1);
     /* 3 cycles per loop: 560 loops @ 48 Mhz ~= 35 us */
-    CPUdelay ( 560 );
+    CPUdelay(560);
 }
 
 /*
  *  ======== Board_shutDownExtFlash ========
  */
-void Board_shutDownExtFlash ( void )
+void Board_shutDownExtFlash(void)
 {
     /*
      *  To be sure we are putting the flash into sleep and not waking it,
@@ -234,22 +228,22 @@ void Board_shutDownExtFlash ( void )
     Board_wakeUpExtFlash();
 
     /* SPI Flash CS*/
-    GPIO_setConfig ( BOARD_EXT_FLASH_SPI_CS, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_HIGH | GPIO_CFG_OUT_STR_MED );
+    GPIO_setConfig(BOARD_EXT_FLASH_SPI_CS, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_HIGH | GPIO_CFG_OUT_STR_MED);
     /* SPI Flash CLK */
-    GPIO_setConfig ( BOARD_EXT_FLASH_SPI_CLK, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_LOW | GPIO_CFG_OUT_STR_MED );
+    GPIO_setConfig(BOARD_EXT_FLASH_SPI_CLK, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_LOW | GPIO_CFG_OUT_STR_MED);
     /* SPI Flash PICO */
-    GPIO_setConfig ( BOARD_EXT_FLASH_SPI_PICO, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_LOW | GPIO_CFG_OUT_STR_MED );
+    GPIO_setConfig(BOARD_EXT_FLASH_SPI_PICO, GPIO_CFG_OUTPUT | GPIO_CFG_OUT_LOW | GPIO_CFG_OUT_STR_MED);
     /* SPI Flash POCI */
-    GPIO_setConfig ( BOARD_EXT_FLASH_SPI_POCI, GPIO_CFG_IN_PD );
+    GPIO_setConfig(BOARD_EXT_FLASH_SPI_POCI, GPIO_CFG_IN_PD);
 
     uint8_t extFlashShutdown = 0xB9;
 
-    Board_sendExtFlashByte ( extFlashShutdown );
+    Board_sendExtFlashByte(extFlashShutdown);
 
-    GPIO_resetConfig ( BOARD_EXT_FLASH_SPI_CS );
-    GPIO_resetConfig ( BOARD_EXT_FLASH_SPI_CLK );
-    GPIO_resetConfig ( BOARD_EXT_FLASH_SPI_PICO );
-    GPIO_resetConfig ( BOARD_EXT_FLASH_SPI_POCI );
+    GPIO_resetConfig(BOARD_EXT_FLASH_SPI_CS);
+    GPIO_resetConfig(BOARD_EXT_FLASH_SPI_CLK);
+    GPIO_resetConfig(BOARD_EXT_FLASH_SPI_PICO);
+    GPIO_resetConfig(BOARD_EXT_FLASH_SPI_POCI);
 }
 
 
@@ -260,7 +254,7 @@ void Board_shutDownExtFlash ( void )
  *  Perform any board-specific initialization needed at startup.  This
  *  function is declared weak to allow applications to override it if needed.
  */
-void __attribute__ ( ( weak ) ) Board_initHook ( void )
+void __attribute__((weak)) Board_initHook(void)
 {
 }
 
@@ -268,7 +262,7 @@ void __attribute__ ( ( weak ) ) Board_initHook ( void )
  *  ======== Board_init ========
  *  Perform any initialization needed before using any board APIs
  */
-void Board_init ( void )
+void Board_init(void)
 {
     /* ==== /ti/drivers/Power initialization ==== */
     Power_init();

@@ -20,7 +20,7 @@
 
 #define CONFIG_CC1352P_2_LAUNCHXL
 #ifndef DeviceFamily_CC13X2
-    #define DeviceFamily_CC13X2
+#define DeviceFamily_CC13X2
 #endif
 
 #include <ti/devices/DeviceFamily.h>
@@ -73,7 +73,7 @@ extern const uint_least8_t                  CONFIG_BUTTON_0_CONST;
  *  This function should be called once at a point before any use of
  *  TI-Drivers.
  */
-extern void Board_init ( void );
+extern void Board_init(void);
 
 /*
  *  ======== Board_initGeneral ========
