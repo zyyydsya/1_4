@@ -6,3 +6,5 @@ PWM_Hardware/Debug/
 PWM_Software/Debug/
 shutdown_test/Debug/
 sleep_test/Debug/
+
+.theia/

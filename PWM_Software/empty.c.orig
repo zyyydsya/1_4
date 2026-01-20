@@ -1,34 +1,11 @@
-/*
- * Copyright (c) 2015-2019, Texas Instruments Incorporated
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * *  Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *
- * *  Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *
- * *  Neither the name of Texas Instruments Incorporated nor the names of
- *    its contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  
- */
+/*********************************************************************
+* Copyright (c)  Hehe,Ltd. All rights reserved.
+* Description:软件配置PWM呼吸灯          
+*
+* History:修改历史记录列表，包括修改日期、修改者及修改内容简述           
+* Date               Author                Modification:                     
+* 2026-1-20          张也                   create v1.0
+*********************************************************************/
 
 /*
  *  ======== empty.c ========
@@ -48,12 +25,11 @@
 /* Driver configuration */
 #include "ti_drivers_config.h"
 
-static uint32_t timer_total_step = 40;     /* 一次pwm亮灭的总步数 */
+static uint32_t timer_total_step = 40;     /* 一次完整呼吸的总步数 */
 static uint32_t timer_period = 50;          /* 定时器中断周期us */
-/* 以上两个决定了载波周期timer_period*timer_total_step/1000000 */
 volatile static uint32_t pwm_duty = 0;      /* pwm占空比 */
 static uint32_t pwm_total_steps = 1000;     /* pwm总步数 */
-static uint32_t pwm_period = 2000;          /* pwm周期ms */
+static uint32_t breathperiod = 2000;          /* pwm周期ms */
 volatile static uint32_t pwm_steps_idx = 0; /* 当前步数参数 */
 static uint32_t pwm_timer_idx = 0;          /* 单次改变占空比所需要进入timer的次数*/
 
@@ -98,10 +74,10 @@ static Timer_Handle my_timer_init ( uint_least8_t index, Timer_Mode timerMode,
  * @param[in]   timer_period    定时器周期us
  * @return      中断次数（向上取整，避免为0）
  */
-static uint32_t PWM_period_once ( uint32_t pwm_period, uint32_t pwm_total_steps,
+static uint32_t PWM_period_once ( uint32_t breathperiod, uint32_t pwm_total_steps,
                                   uint32_t timer_period )
 {
-    uint32_t us_per_step  = pwm_period * 1000 / pwm_total_steps / timer_period;
+    uint32_t us_per_step  = breathperiod * 1000 / pwm_total_steps / timer_period;
     /* 进行零值保护 */
     if ( us_per_step == 0 )
     {
@@ -160,15 +136,15 @@ void timercallback ( Timer_Handle handle, int_fast16_t status )
  */
 void *mainThread ( void *arg0 )
 {
-    /* 1 second delay */
     uint32_t time = 1;
 
-    /* Call driver init functions */
+    /* GPIO初始化 */
     GPIO_init();
     GPIO_setConfig ( CONFIG_GPIO_LED_0, GPIO_CFG_OUT_STD | GPIO_CFG_OUT_LOW );
-    /* 计算占空比参数每次改变需要进入定时器的次数*/
-    pwm_timer_idx = PWM_period_once ( pwm_period, pwm_total_steps, timer_period );
 
+    /* 计算占空比参数每次改变需要进入定时器的次数*/
+    pwm_timer_idx = PWM_period_once ( breathperiod, pwm_total_steps, timer_period );
+    /* 定时器初始化 */
     Timer_Handle timer0 =
         my_timer_init ( CONFIG_TIMER_0, Timer_CONTINUOUS_CALLBACK, Timer_PERIOD_US,
                         timercallback, timer_period );
@@ -189,6 +165,7 @@ void *mainThread ( void *arg0 )
         }
     }
 
+    /* 主循环 */
     while ( 1 )
     {
         sleep ( time );

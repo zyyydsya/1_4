@@ -1,9 +1,9 @@
 /*********************************************************************
 * Copyright (c)  Hehe,Ltd. All rights reserved.
-* Description:进行关机模式测试功耗的代码        
+* Description:进行关机模式测试功耗的代码
 *
-* History:修改历史记录列表，包括修改日期、修改者及修改内容简述           
-* Date               Author                Modification:                     
+* History:修改历史记录列表，包括修改日期、修改者及修改内容简述
+* Date               Author                Modification:
 * 2026-1-20          张也                   create v1.0
 *********************************************************************/
 
