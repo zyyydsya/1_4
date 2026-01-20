@@ -15,10 +15,10 @@ if errorlevel 1 (
 echo ✅ 检测到astyle工具已安装
 echo.
 
-:: 第二步：递归格式化所有.c/.h文件
+:: 第二步：递归格式化所有.c/.h文件（匹配目标参数）
 echo 📌 开始递归格式化当前目录及子目录的 .c/.h 文件...
 echo.
-powershell -Command "Get-ChildItem -Path . -Recurse -Include *.c,*.h | ForEach-Object { astyle.exe --style=allman -S -U -K -p -s4 -Y -xW -P -z1 -Z $_.FullName; Write-Host '✅ 已格式化：' $_.FullName -ForegroundColor Green }"
+powershell -Command "Get-ChildItem -Path . -Recurse -Include *.c,*.h | ForEach-Object { astyle.exe --style=allman -S -U -t -n -K -p -s4 -j -q -Y -xW -xV $_.FullName; Write-Host '✅ 已格式化：' $_.FullName -ForegroundColor Green }"
 
 :: 第三步：执行完成提示
 echo.

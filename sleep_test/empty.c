@@ -58,9 +58,9 @@ volatile uint8_t mode = MODE_SLEEP;
  * @param[in]  buttonEvents    中断触发类型
  * @note       进行模式的切换
  */
-static void buttonCallback ( Button_Handle buttonHandle, Button_EventMask buttonEvents )
+static void buttonCallback(Button_Handle buttonHandle, Button_EventMask buttonEvents)
 {
-    if ( mode == MODE_SLEEP )
+    if(mode == MODE_SLEEP)
     {
         mode = MODE_NORMAL;
     }
@@ -73,21 +73,21 @@ static void buttonCallback ( Button_Handle buttonHandle, Button_EventMask button
 /*
  *  ======== mainThread ========
  */
-void *mainThread ( void *arg0 )
+void *mainThread(void *arg0)
 {
     uint32_t time = 4;
     /* 按键初始化 */
     Button_Params buttonParams;
-    Button_Params_init ( &buttonParams );
+    Button_Params_init(&buttonParams);
     buttonParams.buttonCallback  = buttonCallback;
     buttonParams.buttonEventMask = Button_EV_PRESSED;
-    Button_open ( CONFIG_BUTTON_0, &buttonParams );
+    Button_open(CONFIG_BUTTON_0, &buttonParams);
     /* 主循环 */
-    while ( 1 )
+    while(1)
     {
-        if ( mode == MODE_SLEEP )
+        if(mode == MODE_SLEEP)
         {
-            sleep ( time );
+            sleep(time);
         }
         else
         {

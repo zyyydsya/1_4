@@ -65,20 +65,20 @@ volatile static uint32_t pwm_duty = 0;          /* pwm占空比 */
  * @return      返回打开的 Timer 句柄，失败返回 NULL
  * @warning     调用者需要保证 PWM 实例号合法
  */
-static PWM_Handle my_pwm_init ( int index, uint32_t periodValue )
+static PWM_Handle my_pwm_init(int index, uint32_t periodValue)
 {
     PWM_Handle pwmhandle;
     PWM_Params pwmparams;
 
     PWM_init();
-    PWM_Params_init ( &pwmparams );
+    PWM_Params_init(&pwmparams);
 
     pwmparams.dutyUnits = PWM_DUTY_US;
     pwmparams.dutyValue = 0;
     pwmparams.periodUnits = PWM_PERIOD_US;
     pwmparams.periodValue = periodValue;
 
-    pwmhandle = PWM_open ( index, &pwmparams );
+    pwmhandle = PWM_open(index, &pwmparams);
     return pwmhandle;
 }
 
@@ -94,23 +94,23 @@ static PWM_Handle my_pwm_init ( int index, uint32_t periodValue )
  * @return      返回打开的 Timer 句柄，失败返回 NULL
  * @warning     调用者需要保证 Timer 实例号合法
  */
-static Timer_Handle my_timer_init ( uint_least8_t index, Timer_Mode timerMode,
-                                    Timer_PeriodUnits periodUnits,
-                                    Timer_CallBackFxn timerCallback,
-                                    uint32_t period )
+static Timer_Handle my_timer_init(uint_least8_t index, Timer_Mode timerMode,
+                                  Timer_PeriodUnits periodUnits,
+                                  Timer_CallBackFxn timerCallback,
+                                  uint32_t period)
 {
     Timer_Handle timerhandle;
     Timer_Params timerparams;
 
     Timer_init();
-    Timer_Params_init ( &timerparams );
+    Timer_Params_init(&timerparams);
 
     timerparams.timerMode = timerMode;
     timerparams.periodUnits = periodUnits;
     timerparams.timerCallback = timerCallback;
     timerparams.period = period;
 
-    timerhandle = Timer_open ( index, &timerparams );
+    timerhandle = Timer_open(index, &timerparams);
 
     return timerhandle;
 }
@@ -122,10 +122,10 @@ static Timer_Handle my_timer_init ( uint_least8_t index, Timer_Mode timerMode,
  * @retval Timer周期（微秒）
  * @warning None
  */
-uint32_t get_timerperiodus ( uint32_t cycletimems )
+uint32_t get_timerperiodus(uint32_t cycletimems)
 {
     uint32_t timerPeriodus =
-        ( cycletimems * 1000 ) / pwm_total_steps; /* 每步时间 us */
+        (cycletimems * 1000) / pwm_total_steps;   /* 每步时间 us */
     return timerPeriodus;
 }
 
@@ -134,21 +134,21 @@ uint32_t get_timerperiodus ( uint32_t cycletimems )
  * @param[in]  handle    Timer 句柄
  * @param[in]  status    Timer 状态
  */
-void timer0callback ( Timer_Handle handle, int_fast16_t status )
+void timer0callback(Timer_Handle handle, int_fast16_t status)
 {
     /* 0 ~ 2π 的相位 */
     float phase = 2.0f * M_PI * pwm_steps_idx / pwm_total_steps;
 
     /* sin(phase)：-1 ~ +1 */
-    float s = sinf ( phase );
+    float s = sinf(phase);
 
     /* 映射到 0 ~ pwmperiod */
-    pwm_duty = ( uint32_t ) ( ( s + 1.0f ) * 0.5f * pwmperiod );
+    pwm_duty = (uint32_t)((s + 1.0f) * 0.5f * pwmperiod);
 
-    PWM_setDuty ( pwm_hardware, pwm_duty );
+    PWM_setDuty(pwm_hardware, pwm_duty);
 
     pwm_steps_idx++;
-    if ( pwm_steps_idx >= pwm_total_steps )
+    if(pwm_steps_idx >= pwm_total_steps)
     {
         pwm_steps_idx = 0;
     }
@@ -157,42 +157,42 @@ void timer0callback ( Timer_Handle handle, int_fast16_t status )
 /*
  *  ======== mainThread ========
  */
-void *mainThread ( void *arg0 )
+void *mainThread(void *arg0)
 {
     /* PWM参数初始化 */
-    pwm_hardware = my_pwm_init ( CONFIG_PWM_0_CONST, pwmperiod );
-    if ( pwm_hardware == NULL )
+    pwm_hardware = my_pwm_init(CONFIG_PWM_0_CONST, pwmperiod);
+    if(pwm_hardware == NULL)
     {
-        printf ( "PWM open failed\n" );
-        while ( 1 )
+        printf("PWM open failed\n");
+        while(1)
         {
         }
     }
     /* 定时器参数初始化 */
-    uint32_t timer_period_us = get_timerperiodus ( breathperiod );
+    uint32_t timer_period_us = get_timerperiodus(breathperiod);
     Timer_Handle timer0 =
-        my_timer_init ( CONFIG_TIMER_0, Timer_CONTINUOUS_CALLBACK, Timer_PERIOD_US,
-                        timer0callback, timer_period_us );
-    if ( timer0 == NULL )
+        my_timer_init(CONFIG_TIMER_0, Timer_CONTINUOUS_CALLBACK, Timer_PERIOD_US,
+                      timer0callback, timer_period_us);
+    if(timer0 == NULL)
     {
-        printf ( "Timer init failed\n" );
-        while ( 1 )
+        printf("Timer init failed\n");
+        while(1)
         {
         }
     }
     /* 开启定时器 */
-    if ( Timer_start ( timer0 ) == Timer_STATUS_ERROR )
+    if(Timer_start(timer0) == Timer_STATUS_ERROR)
     {
-        printf ( "Timer start failed\n" );
-        while ( 1 )
+        printf("Timer start failed\n");
+        while(1)
         {
         }
     }
     /* 开启PWM */
-    PWM_start ( pwm_hardware );
+    PWM_start(pwm_hardware);
     /* 主循环 */
-    while ( 1 )
+    while(1)
     {
-        sleep ( time );
+        sleep(time);
     }
 }

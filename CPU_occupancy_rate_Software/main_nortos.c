@@ -41,12 +41,12 @@
 
 #include <ti/drivers/Board.h>
 
-extern void *mainThread ( void *arg0 );
+extern void *mainThread(void *arg0);
 
 /*
  *  ======== main ========
  */
-int main ( void )
+int main(void)
 {
     Board_init();
 
@@ -54,7 +54,7 @@ int main ( void )
     NoRTOS_start();
 
     /* Call mainThread function */
-    mainThread ( NULL );
+    mainThread(NULL);
 
-    while ( 1 ) {}
+    while(1) {}
 }
